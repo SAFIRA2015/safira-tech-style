@@ -1,29 +1,68 @@
-# safira-tech-style
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { FaHeadphones, FaClock, FaChargingStation } from "react-icons/fa";
-import { motion } from "framer-motion";
+{% comment %} Safira Tech Style - Página de Productos {% endcomment %}
 
-const products = [
-  { id: 1, name: "Auriculares Bluetooth", icon: <FaHeadphones />, price: "$120,000" },
-  { id: 2, name: "Reloj Inteligente", icon: <FaClock />, price: "$250,000" },
-  { id: 3, name: "Cargador Inalámbrico", icon: <FaChargingStation />, price: "$80,000" }
-];
+{% layout "theme" %}
 
-export default function SafiraTechStyle() {
-  return (
-    <div className="bg-black text-white min-h-screen p-6">
-      {/* Header */}
-      <motion.header 
-        className="text-center text-neon-blue text-3xl font-bold mb-6"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        SAFIRA TECH STYLE
-      </motion.header>
-      
+<style>
+  body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .header {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00bfff;
+    margin-bottom: 20px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  .product-card {
+    background: #1a1a1a;
+    border: 2px solid #00bfff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00bfff;
+  }
+  .product-title {
+    font-size: 1.5rem;
+    color: #00bfff;
+  }
+  .product-price {
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+  .buy-button {
+    display: block;
+    background: #00bfff;
+    color: black;
+    padding: 10px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .buy-button:hover {
+    background: #009acd;
+  }
+</style>
+
+<div class="header">SAFIRA TECH STYLE</div>
+<p>Tecnología con Estilo - Encuentra los mejores accesorios tech</p>
+
+<div class="product-grid">
+  {% for product in collections["all"].products %}
+    <div class="product-card">
+      <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" style="width:100%; border-radius: 10px;">
+      <h2 class="product-title">{{ product.title }}</h2>
+      <p class="product-price">{{ product.price | money }}</p>
+      <a href="{{ product.url }}" class="buy-button">Comprar Ahora</a>
+    </div>
+  {% endfor %}
+</div>
       {/* Hero Section */}
       <motion.section 
         className="text-center mb-8"
