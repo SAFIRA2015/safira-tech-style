@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+    {{ content_for_header }}
+</head>
+<body>
+    {{ content_for_layout }}
+</body>
+</html>
 {% comment %} Safira Tech Style - Página de Productos {% endcomment %}
 
 {% layout "theme" %}
